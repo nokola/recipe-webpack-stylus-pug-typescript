@@ -1,0 +1,42 @@
+doctype html
+html
+    head
+        meta(charset='utf-8')
+        meta(name='viewport', content='width=device-width, initial-scale=1.0')
+        //- link(rel='stylesheet', href='./styles/style.styl')
+        style.
+            #{require('./styles/style.inline.styl')}
+        link(rel='stylesheet' href=require('./styles/style.url.styl'))
+  
+        //- each cssFile in htmlWebpackPlugin.files.css
+        //-     style !{compilation.assets[cssFile.substr(htmlWebpackPlugin.files.publicPath.length)].source()}
+            
+        title webpack test
+        link(rel='stylesheet', href='https://cdn.firebase.com/libs/firebaseui/2.7.0/firebaseui.css')
+        // Firebase
+        script(src='https://www.gstatic.com/firebasejs/4.12.0/firebase.js')
+        script(src='https://cdn.firebase.com/libs/firebaseui/2.7.0/firebaseui.js')
+        script.
+            // Initialize Firebase
+            var config = {
+                apiKey: "YOUR_API_KEY",
+                authDomain: "YOUR_PROJECT_NAME.firebaseapp.com",
+                databaseURL: "https://YOUR_PROJECT_NAME.firebaseio.com",
+                projectId: "YOUR_PROJECT_NAME",
+                storageBucket: "YOUR_PROJECT_NAME.appspot.com",
+                messagingSenderId: "YOUR_ID"
+            };
+            firebase.initializeApp(config);
+
+    body
+        //- Image loaded from local tree
+        img(src=require('./images/dog.jpg'))
+
+        .stylus-inline Stylus Inline
+        .stylus-url Stylus URL
+        
+        //- this image will be loaded from typescript
+        img#testImage
+
+        //- reference to generated typescript
+        script(src="index.js")
